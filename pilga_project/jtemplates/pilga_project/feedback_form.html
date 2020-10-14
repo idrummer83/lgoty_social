@@ -1,0 +1,82 @@
+{% extends 'pilga_project/base_with_slider.html' %}
+
+{% block page %}
+
+    <div class="container margin-top-80">
+
+        <div class="position-relative mb-5">
+            <h2 class="text-center header-page">Обратная связь</h2>
+
+            <div class="align-items-center position-fixed form-message">
+                <div class="col">
+                    <i class="info mr-3"></i>
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="fs-14">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="block-search block-shadow border-radius p-5">
+
+            <form action="{{ url('feedback') }}" method="POST">
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+                <div class="row" style="margin-bottom: 66px;">
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="fio">Имя и Фамилия:</label>
+                            <input type="text" class="form-control select" id="fio" name="fio" placeholder="">
+                          </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="privilege_type">Выберите тип: *</label>
+                            <select class="form-control select" id="privilege_type" name="privilege_type">
+                                <option value=""></option>
+                                {% for pr_type in privilege_type %}
+                                    <option value="{{ pr_type.id }}">{{ pr_type }}</option>
+                                {% endfor %}
+                            </select>
+                          </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="phone">Контактный телефон:</label>
+                            <input type="tel" class="form-control select" id="phone" name="phone" placeholder="">
+                          </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control select" id="email" name="email" placeholder="">
+                          </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="form-group">
+                            <label for="message">Сообщение:</label>
+                            <textarea class="form-control select" name="message" rows="1" cols=""></textarea>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="button_wide button-shadow bg-dark-1 border-0 text-white">Отправить</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function (){
+            setTimeout(function () {
+                $('.form-message').hide()
+            }, 3000);
+        });
+    </script>
+
+{% endblock %}

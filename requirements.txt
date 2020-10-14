@@ -1,0 +1,16 @@
+asgiref==3.2.10
+Django==3.1.2
+django-ckeditor==6.0.0
+django-filer==2.0.2
+django-js-asset==1.2.2
+django-modeltranslation==0.15.2
+django-mptt==0.11.0
+django-polymorphic==3.0.0
+easy-thumbnails==2.7
+Jinja2==2.11.2
+MarkupSafe==1.1.1
+Pillow==7.2.0
+pytz==2020.1
+six==1.15.0
+sqlparse==0.3.1
+Unidecode==1.1.1

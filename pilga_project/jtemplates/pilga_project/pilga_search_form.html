@@ -1,0 +1,29 @@
+{% extends 'pilga_project/base_with_slider.html' %}
+
+{% block page %}
+
+    <div class="container margin-top-80">
+
+        <div class="position-relative mb-5">
+            <h2 class="text-center header-page">Льготы и Субсидии</h2>
+
+            <div class="align-items-center position-fixed form-message">
+                <div class="col">
+                    <i class="info mr-3"></i>
+                </div>
+                <p class="fs-14 m-0">Вы можете использоваться строку поиска или детальные фильтра для удобного поиска льгот/субсидий в соответствии законодательством Украины</p>
+            </div>
+        </div>
+
+        {% include 'pilga_project/full_search_form.html' %}
+
+    </div>
+    <script>
+        $(document).ready(function (){
+            setTimeout(function () {
+                $('.form-message').hide()
+            }, 3000);
+        });
+    </script>
+
+{% endblock %}

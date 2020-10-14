@@ -1,0 +1,170 @@
+{% extends 'pilga_project/base_with_slider.html' %}
+
+{% block page %}
+
+    <div class="container margin-top-80">
+
+        <div>
+            <div class="d-flex mb-5">
+                <a href="#">Новини</a>
+                <span class="pl-3 pr-3">
+                    <i class="thumbnail"></i>
+                </span>
+                <a href="#">Країни світу повинні вийти з коронакризи сильнішими та підготовленими – Президент</a>
+            </div>
+        </div>
+    
+        <div>
+            <h3 class="news-header font-weight-bold text-center fs-28 mb-4">{{ news_item.title }}</h3>
+            <div class="text-center mb-5">
+                <span class="news-date">
+                    <i class="calendar mr-2"></i>
+                    <span class="color-dark-2">{{ format_date(news_item.created_at )}}</span>
+                </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <div>
+                    {{ news_item.description|safe }}
+                </div>
+            </div>
+            <div class="col-12 col-md-4 order-3 order-md-2">
+                <div class="last-news-wrap border-radius block-shadow">
+                    {% for n in last_news %}
+                        {% if loop.first %}
+                        {% else %}
+                            <div class="position-relative video-link-wrap">
+                                <div class="position-absolute video text-white bg-dark-1 pl-3 pr-3 pt-2 pb-2">видео</div>
+                            </div>
+                        {% endif %}
+                        <div class="d-flex {% if loop.last %}{% else %}pb-3 mb-3{% endif %}">
+                            <span class="news-list-num fs-34 line-height-1">{{ loop.index }}</span>
+                            <div class="pl-3 pt-2 pr-3">
+                                <div class="news-header font-weight-bold fs-16">
+                                    <a href="{{ url('news:news_item', args=[n.id]) }}">{{ n.title }}</a>
+                                </div>
+                                <span class="news-date">
+                                    <i class="calendar mr-2"></i>
+                                    <span>{{ format_date(n.created_at )}}</span>
+                                </span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-12 d-flex flex-wrap justify-content-between align-items-center mb-5 order-2">
+                <div class="mb-4 mb-md-0 pr-3 pr-md-0">
+                    <div class="d-flex align-items-center mb-4">
+                        <strong class="pr-3">Теги:</strong>
+                        {% for tag in news_item.tags.all() %}
+                            <span class="button_small bg-dark-1 mr-2 text-white fs-16">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="w-100">
+                        <strong class="pr-2">Автор:</strong>
+                        <span>{{ news_item.author }}</span>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end align-items-center share-social">
+                    <strong class="pb-3">Поделитесь: </strong>
+                    <a href="#" class="ml-2">
+                        <i>
+                        <svg width="64" height="70" viewBox="0 0 64 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g filter="url(#filter0_d)">
+                            <path d="M20 22C20 18.6863 22.6863 16 26 16H38C41.3137 16 44 18.6863 44 22V40C44 43.3137 41.3137 46 38 46H26C22.6863 46 20 43.3137 20 40V22Z" fill="white"/>
+                            </g>
+                            <path d="M12.5 10C12.5 8.067 14.067 6.5 16 6.5H48C49.933 6.5 51.5 8.067 51.5 10V42C51.5 43.933 49.933 45.5 48 45.5H16C14.067 45.5 12.5 43.933 12.5 42V10Z" fill="#FAFAFC" stroke="#E2E5EC" class="bg-hover"/>
+                            <path d="M34.5395 19.8227H36V17.1197C35.748 17.0829 34.8814 17 33.8722 17C31.7664 17 30.3238 18.4075 30.3238 20.9943V23.375H28V26.3967H30.3238V34H33.1729V26.3975H35.4027L35.7567 23.3757H33.1722V21.2939C33.1729 20.4205 33.3942 19.8227 34.5395 19.8227Z" fill="black"/>
+                            <defs>
+                            <filter id="filter0_d" x="0" y="0" width="64" height="70" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+                            <feOffset dy="4"/>
+                            <feGaussianBlur stdDeviation="10"/>
+                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                            </filter>
+                            </defs>
+                            </svg>
+                        </i>
+                    </a>
+                    <a href="#" class="ml-2">
+                        <i>
+                            <svg width="64" height="70" viewBox="0 0 64 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g filter="url(#filter0_d)">
+                                <path d="M20 22C20 18.6863 22.6863 16 26 16H38C41.3137 16 44 18.6863 44 22V40C44 43.3137 41.3137 46 38 46H26C22.6863 46 20 43.3137 20 40V22Z" fill="white"/>
+                                </g>
+                                <path d="M12.5 10C12.5 8.067 14.067 6.5 16 6.5H48C49.933 6.5 51.5 8.067 51.5 10V42C51.5 43.933 49.933 45.5 48 45.5H16C14.067 45.5 12.5 43.933 12.5 42V10Z" fill="#FAFAFC" stroke="#E2E5EC" class="bg-hover"/>
+                                <path d="M40.9544 22.2931C40.9123 21.3365 40.7576 20.6789 40.536 20.109C40.3074 19.5041 39.9557 18.9625 39.4949 18.5123C39.0447 18.0551 38.4995 17.6998 37.9016 17.4748C37.3285 17.2532 36.6742 17.0985 35.7176 17.0563C34.7539 17.0106 34.4479 17 32.0036 17C29.5593 17 29.2533 17.0106 28.2931 17.0528C27.3365 17.0949 26.6789 17.2498 26.1091 17.4712C25.5041 17.6998 24.9625 18.0515 24.5123 18.5123C24.0551 18.9625 23.7 19.5077 23.4748 20.1056C23.2532 20.6789 23.0985 21.333 23.0563 22.2896C23.0106 23.2533 23 23.5593 23 26.0036C23 28.4479 23.0106 28.7539 23.0528 29.7141C23.0949 30.6707 23.2498 31.3283 23.4714 31.8982C23.7 32.5031 24.0551 33.0447 24.5123 33.4949C24.9625 33.9521 25.5077 34.3074 26.1056 34.5324C26.6789 34.754 27.333 34.9087 28.2897 34.9509C29.2497 34.9932 29.5558 35.0036 32.0002 35.0036C34.4445 35.0036 34.7505 34.9932 35.7106 34.9509C36.6672 34.9087 37.3249 34.754 37.8946 34.5324C39.1046 34.0646 40.0612 33.108 40.529 31.8982C40.7504 31.3249 40.9053 30.6707 40.9474 29.7141C40.9896 28.7539 41.0002 28.4479 41.0002 26.0036C41.0002 23.5593 40.9966 23.2533 40.9544 22.2931ZM39.3332 29.6437C39.2944 30.523 39.1467 30.9978 39.0236 31.3143C38.7211 32.0986 38.0986 32.7211 37.3143 33.0236C36.9978 33.1467 36.5195 33.2944 35.6437 33.333C34.6941 33.3754 34.4093 33.3858 32.0072 33.3858C29.605 33.3858 29.3166 33.3754 28.3705 33.333C27.4912 33.2944 27.0164 33.1467 26.6999 33.0236C26.3096 32.8794 25.9543 32.6508 25.6659 32.3518C25.367 32.0599 25.1384 31.7082 24.9941 31.3179C24.871 31.0014 24.7233 30.523 24.6847 29.6473C24.6424 28.6977 24.632 28.4128 24.632 26.0106C24.632 23.6084 24.6424 23.3201 24.6847 22.3741C24.7233 21.4948 24.871 21.02 24.9941 20.7035C25.1384 20.313 25.367 19.9579 25.6695 19.6694C25.9613 19.3704 26.313 19.1418 26.7035 18.9977C27.02 18.8746 27.4984 18.7269 28.3741 18.6882C29.3236 18.646 29.6086 18.6354 32.0106 18.6354C34.4163 18.6354 34.7011 18.646 35.6473 18.6882C36.5266 18.7269 37.0014 18.8746 37.3179 18.9977C37.7082 19.1418 38.0635 19.3704 38.3518 19.6694C38.6508 19.9613 38.8794 20.313 39.0236 20.7035C39.1467 21.02 39.2944 21.4982 39.3332 22.3741C39.3753 23.3236 39.3859 23.6084 39.3859 26.0106C39.3859 28.4128 39.3753 28.6941 39.3332 29.6437Z" fill="black"/>
+                                <path d="M32.0038 21.3789C29.4505 21.3789 27.3789 23.4504 27.3789 26.0038C27.3789 28.5572 29.4505 30.6287 32.0038 30.6287C34.5572 30.6287 36.6287 28.5572 36.6287 26.0038C36.6287 23.4504 34.5572 21.3789 32.0038 21.3789ZM32.0038 29.0039C30.3474 29.0039 29.0037 27.6604 29.0037 26.0038C29.0037 24.3472 30.3474 23.0037 32.0038 23.0037C33.6604 23.0037 35.0039 24.3472 35.0039 26.0038C35.0039 27.6604 33.6604 29.0039 32.0038 29.0039Z" fill="black"/>
+                                <path d="M37.89 21.1969C37.89 21.7931 37.4066 22.2766 36.8102 22.2766C36.2139 22.2766 35.7305 21.7931 35.7305 21.1969C35.7305 20.6005 36.2139 20.1172 36.8102 20.1172C37.4066 20.1172 37.89 20.6005 37.89 21.1969Z" fill="black"/>
+                                <defs>
+                                <filter id="filter0_d" x="0" y="0" width="64" height="70" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+                                <feOffset dy="4"/>
+                                <feGaussianBlur stdDeviation="10"/>
+                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                                </filter>
+                                </defs>
+                                </svg>
+                        </i>
+                    </a>
+                    <a href="#" class="ml-2">
+                        <i>
+                            <svg width="64" height="70" viewBox="0 0 64 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g filter="url(#filter0_d)">
+                                <path d="M20 22C20 18.6863 22.6863 16 26 16H38C41.3137 16 44 18.6863 44 22V40C44 43.3137 41.3137 46 38 46H26C22.6863 46 20 43.3137 20 40V22Z" fill="white"/>
+                                </g>
+                                <path d="M12.5 10C12.5 8.067 14.067 6.5 16 6.5H48C49.933 6.5 51.5 8.067 51.5 10V42C51.5 43.933 49.933 45.5 48 45.5H16C14.067 45.5 12.5 43.933 12.5 42V10Z" fill="#FAFAFC" stroke="#E2E5EC" class="bg-hover"/>
+                                <path d="M41 20.7314C40.3306 21.025 39.6174 21.2196 38.8737 21.3141C39.6388 20.8574 40.2226 20.1396 40.4971 19.2745C39.7839 19.6997 38.9964 20.0001 38.1571 20.1678C37.4799 19.4466 36.5146 19 35.4616 19C33.4186 19 31.7739 20.6583 31.7739 22.6911C31.7739 22.9836 31.7986 23.2649 31.8594 23.5326C28.7915 23.383 26.0769 21.9126 24.2533 19.6728C23.9349 20.2251 23.7481 20.8574 23.7481 21.538C23.7481 22.816 24.4062 23.9489 25.3872 24.6047C24.7944 24.5935 24.2127 24.4214 23.72 24.1502C23.72 24.1615 23.72 24.1761 23.72 24.1907C23.72 25.984 24.9991 27.4735 26.6765 27.8166C26.3761 27.8988 26.0487 27.9381 25.709 27.9381C25.4727 27.9381 25.2342 27.9246 25.0104 27.8751C25.4885 29.3365 26.8453 30.4109 28.4585 30.4457C27.203 31.4279 25.6089 32.0196 23.8831 32.0196C23.5805 32.0196 23.2902 32.0061 23 31.969C24.6346 33.0231 26.5719 33.625 28.661 33.625C35.4515 33.625 39.164 28 39.164 23.1242C39.164 22.9611 39.1584 22.8036 39.1505 22.6473C39.8829 22.1275 40.4982 21.4784 41 20.7314Z" fill="black"/>
+                                <defs>
+                                <filter id="filter0_d" x="0" y="0" width="64" height="70" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+                                <feOffset dy="4"/>
+                                <feGaussianBlur stdDeviation="10"/>
+                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                                </filter>
+                                </defs>
+                                </svg>
+                        </i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-center header-page">Другие новости</h2>
+
+        <div class="row">
+            {% for n in other_news %}
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="d-block block-shadow border-radius overflow-hidden">
+                        {% for img in n.news_images.all() %}
+                            <div class="news-img-wrap" style="background: url('{{ img.image.url }}') 0 0 no-repeat; background-size: cover;">
+                            </div>
+                        {% endfor %}
+                        <div class="news-wrap">
+                            <div class="news-header font-weight-bold fs-16">
+                                <a href="{{ url('news:news_item', args=[n.id]) }}">{{ n.title }}</a></div>
+                            <span class="news-date">
+                                <i class="calendar mr-2"></i>
+                                <span>{{ format_date(n.created_at )}}</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+{% endblock %}

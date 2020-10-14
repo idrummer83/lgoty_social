@@ -1,0 +1,162 @@
+{% extends 'pilga_project/base_with_slider.html' %}
+
+{% block page %}
+
+    <div class="container margin-top-80">
+    
+        <h2 class="text-center header-page">Новости</h2>
+
+        <div class="row no-gutters align-items-center" style="margin-bottom: 50px;">
+            <div class="col-12 col-md-6 p-0 mb-3 mb-md-0">
+                <a class="d-inline-block pr-4 mb-3" href="#">
+                    <strong class="pb-1" style="border-bottom: 2px solid #1B1D1F;">Закон</strong></a>
+                <a class="d-inline-block pr-4 mb-3" href="#">Льготы</a>
+                <a class="d-inline-block pr-4 mb-3" href="#">Субсидии</a>
+                <a href="#">Изменения</a>
+            </div>
+            <div class="col-12 col-md-6 d-flex justify-content-md-end align-items-center position-relative">
+                <div class="pr-3 mr-3" style="border-right: 1px solid #E2E5EC;">
+                    <i class="search_2"></i>
+                </div>
+                <div class="position-relative">
+                    <a data-toggle="collapse" href="#collapse_datapicker" role="button" aria-expanded="false"
+                       aria-controls="collapse_datapicker">
+                        <i class="calendar_2"></i>
+                        <span class="pl-3">Фильтр по дате</span>
+                    </a>
+                </div>
+
+                <div class="collapse" id="collapse_datapicker">
+                    <div class="card card-body p-0 border-0 position-absolute" style="">
+                        <div id="datepicker"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-8 order-1 order-md-0">
+                <div class="row">
+                    {% for n in news %}
+                        <div class="col-12 col-lg-6 mb-4 {% if loop.index > 4  %}d-none d-lg-block{% endif %}">
+                            <div class="d-block block-shadow border-radius overflow-hidden">
+                                {% for img in n.news_images.all() %}
+                                    <div class="news-img-wrap"
+                                         style="background: url('{{ img.image.url }}') 0 0 no-repeat;
+                                                 background-size: cover;">
+                                    </div>
+                                {% endfor %}
+                                <div class="news-wrap">
+                                    <div class="news-header font-weight-bold fs-16">
+                                        <a href="{{ url('news:news_item', args=[n.id]) }}">{{ n.title }}</a>
+                                    </div>
+                                    <span class="news-date">
+                                        <i class="calendar mr-2"></i>
+                                        <span>{{ format_date(n.created_at )}}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 order-0 ">
+                <div class="last-news-wrap border-radius block-shadow">
+                    {% for n in last_news %}
+                        {% if loop.first %}
+                        {% else %}
+                            <div class="position-relative video-link-wrap">
+                                <div class="position-absolute video text-white bg-dark-1 pl-3 pr-3 pt-2 pb-2" style="
+                                border-bottom-left-radius: 6px;top: 0;right: 0;">видео</div>
+                            </div>
+                        {% endif %}
+                        <div class="d-flex {% if loop.last %}{% else %}pb-3 mb-3{% endif %}">
+                            <span class="news-list-num fs-34 line-height-1">{{ loop.index }}</span>
+                            <div class="pl-3 pt-2 pr-3">
+                                <div class="news-header font-weight-bold fs-16">
+                                    <a href="{{ url('news:news_item', args=[n.id]) }}">{{ n.title }}</a>
+                                </div>
+                                <span class="news-date">
+                                    <i class="calendar mr-2"></i>
+                                    <span>{{ format_date(n.created_at )}}</span>
+                                </span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="d-none d-md-block col-12 p-0 mb-4">
+                    <div class="d-block block-shadow border-radius overflow-hidden">
+                        {% for img in one_news.news_images.all() %}
+                            <div class="news-img-wrap" style="
+                                    background: url('{{ img.image.url }}') 0 0 no-repeat; background-size: cover;">
+                            </div>
+                        {% endfor %}
+                        <div class="news-wrap">
+                            <div class="news-header font-weight-bold fs-16">
+                                <a href="{{ url('news:news_item', args=[one_news.id]) }}">{{ one_news.title }}</a>
+                            </div>
+                            <span class="news-date">
+                                <i class="calendar mr-2"></i>
+                                <span>{{ format_date(one_news.created_at )}}</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 mt-5 pagination d-flex justify-content-center align-items-center order-3">
+                {% if news.has_other_pages() %}
+                    {% if news.has_previous() %}
+                        <a class=" pr-3" href="?page={{ news.previous_page_number() }}"> &lt;
+                            <span class="pl-2 d-none d-sm-inline-block">Предыдущая</span>
+                        </a>
+                        {% else %}
+                        <span class="pr-3 disabled">Старт</span>
+                    {% endif %}
+                    <span class="current">
+                        {% for item in news.paginator.page_range %}
+                            {% if news.number == item %}
+                                <a class="active d-inline-block fs-16 ml-3" href="?page={{ item }}">{{ item }}</a>
+                                {% else %}
+                                <a class="d-inline-block ml-3 " href="?page={{ item }}">{{ item }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if news.number == news.paginator.num_pages%}
+                            {% else %}
+                            <span class="pl-3 pr-3">...</span> <span>{{ news.paginator.num_pages }}</span>
+                        {% endif %}
+                    </span>
+                    {% if news.has_next() %}
+                        <a class="pl-3 pr-3" href="?page={{ news.next_page_number() }}">
+                            <span class="pr-2 d-none d-sm-inline-block">Следующая</span> &gt;
+                        </a>
+                        {% else %}
+                        <span class="pl-3 "> Конец </span>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+    <script src="{{ static( 'js/jquery.js' )}}"></script>
+    <script src="{{ static( 'js/jquery-ui.js' )}}"></script>
+    <script src="{{ static( 'js/datapicker-ru.js' )}}"></script>
+
+
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker(
+        {
+      changeMonth: true,
+      changeYear: true
+    },
+        $.datepicker.regional[ "ru" ],
+    );
+  } );
+  </script>
+
+
+{% endblock %}

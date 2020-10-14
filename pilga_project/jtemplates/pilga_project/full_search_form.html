@@ -1,0 +1,88 @@
+<div class="block-search p-3 p-sm-4 p-lg-0">
+            <form action="{{ url('search_request') }}" method="get">
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+                <div class="form-group col-12 col-md-4 ml-auto mr-auto p-0 pb-5 mb-3">
+                    <div class="position-relative">
+                        <i class="search position-absolute"></i>
+                        <input name="title" type="text" class="form-control pl-5 w-100 search-by-title"
+                               placeholder="Поиск по названию">
+                    </div>
+                </div>
+
+                <div class="row align-items-baseline pb-5 mb-3" style="margin-bottom: 66px;">
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="privilege_type">Выберите тип: *</label>
+                            <select class="form-control select" id="privilege_type" name="privilege_type">
+                                <option value=""></option>
+                                {% for pr_type in privilege_type %}
+                                    <option value="{{ pr_type.id }}">{{ pr_type }}</option>
+                                {% endfor %}
+                            </select>
+                          </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="group">Группа льготы 1: *</label>
+                            <select class="form-control select" id="group" name="group">
+                            <option value=""></option>
+                              {% for gr in group %}
+                                    <option value="{{ gr.id }}">{{ gr }}</option>
+                                {% endfor %}
+                            </select>
+                          </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="subgroup">Группа льготы 2: *</label>
+                            <select class="form-control select" id="subgroup" name="subgroup">
+                            <option value=""></option>
+                              {% for sub in subgroup%}
+                                    <option value="{{ sub.id }}">{{ sub }}</option>
+                                {% endfor %}
+                            </select>
+                          </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="region">Регион: *</label>
+                            <select class="form-control select" id="region" name="region">
+                            <option value=""></option>
+                              {% for reg in region %}
+                                    <option value="{{ reg.id }}">{{ reg }}</option>
+                                {% endfor %}
+                            </select>
+                          </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="document_type">Тип нормативного документа: *</label>
+                            <select class="form-control select" id="document_type" name="document_type">
+                            <option value=""></option>
+                              {% for d_type in document_type %}
+                                    <option value="{{ d_type.id }}">{{ d_type }}</option>
+                                {% endfor %}
+                            </select>
+                          </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="title">Название нормативного документа: *</label>
+{#                            <input type="text" class="form-control" id="title" name="title" placeholder="Поиск по названию">#}
+                            <select class="form-control select" id="document_type" name="document_type">
+                            <option value=""></option>
+                              {% for d_type in privilege %}
+                                    <option value="{{ d_type.id }}">{{ d_type.title }}</option>
+                                {% endfor %}
+                            </select>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="button_wide button-shadow bg-dark-1 border-0 text-white">Поиск</button>
+                </div>
+
+            </form>
+        </div>

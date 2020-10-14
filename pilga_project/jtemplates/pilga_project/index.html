@@ -1,0 +1,171 @@
+{% extends 'pilga_project/base_with_slider.html' %}
+
+{% block page %}
+
+    <div class="container">
+        <div class="block-shadow position-relative block-search bg-white border-radius main_page_form">
+            <div class="row justify-content-between align-items-center header-block">
+                <h2 class="header-page col-auto mb-4 mb-md-0 pl-0">Льготы и Субсидии</h2>
+                <div class="col-auto p-0">
+                    <div class="position-relative">
+                        <i class="search position-absolute"></i>
+                        <input type="text" name="title" class="form-control pl-5 search-by-title" placeholder="Поиск по названию">
+                    </div>
+                </div>
+            </div>
+
+            <form action="{{ url('search_request') }}" method="get">
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+                <div class="row justify-content-center" style="margin-bottom: 66px;">
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="privilege_type">Выберите тип:</label>
+                            <select class="form-control select" id="privilege_type" name="privilege_type">
+                                <option value=""></option>
+                                {% for pr_type in privilege_type %}
+                                    <option value="{{ pr_type.id }}">{{ pr_type }}</option>
+                                {% endfor %}
+                            </select>
+                          </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="group">Группа льготы 1:</label>
+                            <select class="form-control select" id="group" name="group">
+                            <option value=""></option>
+                              {% for gr in group %}
+                                    <option value="{{ gr.id }}">{{ gr }}</option>
+                                {% endfor %}
+                            </select>
+                          </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="subgroup">Группа льготы 2:</label>
+                            <select class="form-control select" id="subgroup" name="subgroup">
+                                <option value=""></option>
+                                  {% for sub in subgroup%}
+                                    <option value="{{ sub.id }}">{{ sub }}</option>
+                                {% endfor %}
+                            </select>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="button_wide button-shadow bg-dark-1 border-0 text-white">Поиск</button>
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="news-wrap" style="padding: 70px 0;">
+
+            <h2 class="text-center header-page">Новости</h2>
+
+            <div class="row">
+
+                <div class="col-12 col-md-8">
+                    <div class="row">
+                        {% for n in news %}
+                            <div class="col-12 col-md-6 mb-4">
+                                <div class="block-shadow border-radius overflow-hidden">
+                                    {% for img in n.news_images.all() %}
+                                        <div class="news-img-wrap" style="background: url('{{ img.image.url }}') 0 0 no-repeat; background-size: cover;">
+                                        </div>
+                                    {% endfor %}
+                                    <div class="news-wrap">
+                                        <div class="news-header font-weight-bold fs-16">
+                                            <a href="{{ url('news:news_item', args=[n.id]) }}">{{ n.title }}</a>
+                                        </div>
+                                        <span class="news-date">
+                                            <i class="calendar mr-2"></i>
+                                            <span>{{ format_date(n.created_at )}}</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="last-news-wrap border-radius block-shadow">
+                        {% for n in last_news %}
+                            {% if loop.first %}
+                            {% else %}
+                                <div class="position-relative" style="border-bottom: 2px solid #C0C4CF;margin-bottom: 36px;">
+                                    <div class="position-absolute video text-white bg-dark-1 pl-3 pr-3 pt-2 pb-2" style="
+                                    border-bottom-left-radius: 6px;top: 0;right: 0;">видео</div>
+                                </div>
+                            {% endif %}
+                            <div class="d-flex {% if loop.last %}{% else %}pb-3 mb-3{% endif %}">
+                                <span class="news-list-num" style="font-size: 34px;line-height: 1;">{{ loop.index }}</span>
+                                <div class="pl-3 pt-2 pr-3">
+                                    <div class="news-header font-weight-bold fs-16">
+                                        <a href="{{ url('news:news_item', args=[n.id]) }}">{{ n.title }}</a></div>
+                                    <span class="news-date">
+                                        <i class="calendar mr-2"></i>
+                                        <span>{{ format_date(n.created_at )}}</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-12 mt-5 text-center">
+                    <a class="button_wide text-white bg-dark-1 button-shadow" href="{{ url('news:index') }}" style="">Все новости</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="subscribe-wrap text-center bg_gradient">
+        <div class="container">
+            <span class="text-white">Заполните форму</span>
+            <h2 class="font-weight-bold text-center text-white fs-28 mt-4 mb-5">Подпишитесь на рассылку</h2>
+            <form class="m-auto" action="{{ url('subscribe') }}" method="post">
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <div class="row justify-content-center mb-4">
+                    <div class="col-12 col-md-3 mb-3">
+                        <input type="text" class="form-control p-3" name="name" placeholder="Имя">
+                    </div>
+                    <div class="col-12 col-md-3 mb-3">
+                    <input type="text" class="form-control p-3" name="phone" placeholder="Телефон">
+                    </div>
+                    <div class="col-12 col-md-3 mb-3">
+                        <input type="text" class="form-control p-3" name="email" placeholder="Email">
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 m-auto p-0 text-center">
+                    <button type="submit" class="button_short d-inline-block bg-light-2 button-shadow border-0">Подписаться</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="law-wrap" style="">
+            <h2 class="text-center mb-4 font-weight-bold">Хотите знать все изменения в законодательстве?</h2>
+            <div class="row justify-content-center align-items-center col-12 col-md-10 m-auto p-0">
+                <span class="col-12 col-sm-auto text-center text-sm-left">Переходите по ссылке?</span>
+                <i class="arrows d-block d-sm-inline-block mt-4 mb-4 ml-3 mr-4"></i>
+                <div class="col-12 col-sm-auto text-center">
+                    <a class="button_short button-shadow bg-dark-1 text-white d-inline-block" href="#">Законодательство</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
