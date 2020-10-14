@@ -21,7 +21,7 @@
 
                     <div class="dropdown d-none d-lg-block">
                         <span id="phones" class="d-flex align-items-center dropdown-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="text-white pr-2 fs-16">+38 050 900 00 00</span>
+                            <span class="text-white pr-2 fs-16">+38 050 900 00 00</span>
                             <i class="arr-down"></i>
                         </span>
                         <div class="dropdown-menu border-0 p-0" aria-labelledby="phones">
@@ -43,10 +43,10 @@
                     <i class="enter"></i>
                     <span class="pl-2 fs-14">Вход</span>
                 </a>
-                <a class="button_short text-white bg-dark-2 ml-3 mr-4 fs-14" href="#">Регистрация</a>
+                <a class="button_short text-white bg-dark-2 ml-3 mr-lg-4 fs-14" href="#">Регистрация</a>
 
                 <div class="dropdown d-none d-lg-block">
-                    <span id="dLabel" class="d-flex align-items-center dropdown-btn" data-toggle="dropdown"
+                    <span id="language_menu" class="d-flex align-items-center dropdown-btn" data-toggle="dropdown"
                           aria-haspopup="true" aria-expanded="false">
                         {% if request.LANGUAGE_CODE == 'uk' %}
                             <i class="flag-ukr"></i>
@@ -56,7 +56,7 @@
                     <span class="text-white pl-3 pr-2 fs-14 pt-1">{{ settings.LANGUAGES_VIEWS.get(request.LANGUAGE_CODE, '') }}</span>
                         <i class="arr-down mt-1"></i>
                     </span>
-                    <div class="dropdown-menu border-0 p-0" aria-labelledby="dLabel">
+                    <div class="dropdown-menu border-0 p-0" aria-labelledby="language_menu">
                         {% for l in settings.LANGUAGES %}
                             {% if request.LANGUAGE_CODE != l[0] %}
                                 <a href="/{{ l[0] }}{{ request.path[3:] }}" class="item d-flex align-items-center justify-content-center" style="width: 120px; height: 54px;">
@@ -132,17 +132,61 @@
             <div class="d-md-none row d-flex align-items-center m-0 mob-additional">
                 <span class="col-12 p-0 fs-16">Перезвоните мне</span>
                 <div class=" col-8 p-0">
-                    <div class="d-flex align-items-center">
-                        <img class="" src="{{ static('img/icons/phone_square_icon.svg') }}" alt="">
-                        <a class="pr-1 fs-16" href="tel:+380509000000">+38 050 900 00 00</a>
-                        <i class="arr-down-black"></i>
+                    <div class="dropdown">
+                        <span id="phones_mob" class="d-flex align-items-center dropdown-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="pr-2 fs-16">+38 050 900 00 00</span>
+                            <i class="arr-down"></i>
+                        </span>
+                        <div class="dropdown-menu border-0 p-0 position-relative" aria-labelledby="phones_mob">
+                            <ul class="list-unstyled m-0 p-4" style="width: 200px">
+                                <li class="mb-3 pb-3" style="border-bottom: 1px solid #c4c4c4;">
+                                    <a class="fs-16" href="tel:+380509000000">+38 050 900 00 00</a>
+                                </li>
+                                <li>
+                                    <a class=" fs-16" href="tel:+380509000000">+38 050 900 00 00</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+{#                    <div class="d-flex align-items-center">#}
+{#                        <img class="" src="{{ static('img/icons/phone_square_icon.svg') }}" alt="">#}
+{#                        <a class="pr-1 fs-16" href="tel:+380509000000">+38 050 900 00 00</a>#}
+{#                        <i class="arr-down-black"></i>#}
+{#                    </div>#}
                 </div>
                 <div class="col-4 p-0 ">
-                    <div class="d-flex align-items-center">
-                        <i class="flag-ukr"></i>
-                        <span class="pl-3 pr-2 fs-14">Укр</span>
-                        <i class="arr-down-black"></i>
+{#                    <div class="d-flex align-items-center">#}
+{#                        <i class="flag-ukr"></i>#}
+{#                        <span class="pl-3 pr-2 fs-14">Укр</span>#}
+{#                        <i class="arr-down-black"></i>#}
+{#                    </div>#}
+                    <div class="dropdown">
+                        <span id="language_menu_mob" class="d-flex align-items-center dropdown-btn" data-toggle="dropdown"
+                              aria-haspopup="true" aria-expanded="false">
+                            {% if request.LANGUAGE_CODE == 'uk' %}
+                                <i class="flag-ukr"></i>
+                            {% else %}
+                                <i class="flag-rus"></i>
+                            {% endif %}
+                        <span class="pl-3 pr-2 fs-14 pt-1">{{ settings.LANGUAGES_VIEWS.get(request.LANGUAGE_CODE, '') }}</span>
+                            <i class="arr-down mt-1"></i>
+                        </span>
+                        <div class="dropdown-menu border-0 p-0 position-relative" aria-labelledby="language_menu_mob">
+                            {% for l in settings.LANGUAGES %}
+                                {% if request.LANGUAGE_CODE != l[0] %}
+                                    <a href="/{{ l[0] }}{{ request.path[3:] }}" class="item d-flex align-items-center justify-content-center" style="width: 120px; height: 54px;">
+                                        {% if request.LANGUAGE_CODE == 'ru' %}
+                                            <i class="flag-ukr"></i>
+                                            {% else %}
+                                            <i class="flag-rus"></i>
+                                        {% endif %}
+                                        <span class="pl-3">
+                                            {{ settings.LANGUAGES_VIEWS.get(l[0], '') }}
+                                        </span>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
