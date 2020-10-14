@@ -2,7 +2,6 @@ from .models import Subscribe, FeedBack
 
 from django.core.validators import validate_email, validate_integer
 from django.core.exceptions import ValidationError
-from django.forms.models import ModelForm
 from django.forms import ModelForm
 
 

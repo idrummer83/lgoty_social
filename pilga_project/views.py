@@ -138,19 +138,6 @@ def institution_item(request, slug):
     return render(request, 'pilga_project/agency_item.html', context)
 
 
-# def send_feedback(request):
-#     if request.method == 'POST':
-#         form = FeedBackForm(request.POST or None)
-#         if form.errors:
-#             print('***', form.errors)
-#             messages.error(request, 'jhgfjhgfjhgf', extra_tags='form')
-#             return HttpResponseRedirect('/feedback')
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Your subscribe saved successfully!')
-#             return redirect('/feedback')
-
-
 def subscribe(request):
     if request.method == 'POST':
         form = SubscribeForm(request.POST)
