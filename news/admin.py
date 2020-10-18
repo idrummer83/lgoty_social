@@ -16,7 +16,7 @@ class ImageInline(admin.TabularInline):
 
 @admin.register(News)
 class NewsAdmin(TranslationAdmin):
-    list_display = ('id', 'title', 'main_page', 'created_at', 'updated_at', 'published', 'author')
+    list_display = ('id', 'title', 'main_page', 'created_at', 'published', 'author')
     inlines = (ImageInline,)
 
 

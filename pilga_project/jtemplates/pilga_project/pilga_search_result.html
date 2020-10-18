@@ -4,7 +4,7 @@
 
     <div class="container margin-top-80">
 
-        <div class="d-flex justify-content-between align-items-center mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
 
             <div>
                 <div class="d-flex mb-5">
@@ -28,11 +28,15 @@
                   <div class="modal-dialog container">
                     <div class="modal-content">
                       <div class="modal-header border-0">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
+                        <button type="button" class="close mt-1 mr-1" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">
+                              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20 2L18 0L10 8L2 0L0 2L8 10L0 18L2 20L10 12L18 20L20 18L12 10L20 2Z" fill="#1B1D1F"/>
+                                </svg>
+                          </span>
                         </button>
                       </div>
-                      <div class="modal-body block-search pl-3 pr-3 pl-sm-5 pr-sm-5">
+                      <div class="modal-body block-search pl-3 pr-3 pl-sm-5 pr-sm-5 pb-5">
                         <h2 class="text-center header-page">Разширеный поиск</h2>
 
                           {% include 'pilga_project/full_search_form.html' %}
@@ -50,7 +54,7 @@
             <a href="{{ url('download_csv') }}" class="button_short button-shadow bg-dark-1 text-white">Выгрузить в pdf</a>
         </div>
 
-        <div class="mb-5 pb-4">
+        <div class="mb-4 pb-4">
 
             {% for obj in result %}
 
@@ -62,7 +66,12 @@
                         border-right: 1px solid #EDEDED;">{{ loop.index }}</div>
 
                         <div class="d-flex justify-content-between align-items-center w-100" style="padding: 0 34px 0 30px;">
-                            <div class="font-weight-bold" style="">{{ obj.title }}</div>
+                            <div>
+                                <a class="font-weight-bold"
+                                       href="{{ url('privilege_item', args=[obj.title]) }}">
+                                    {{ obj.title }}
+                                </a>
+                            </div>
                             <div class="d-none d-sm-block">
                                 <strong>Сумма</strong>
                                 <span class="color-dark-2">{{ obj.value }}</span>
@@ -71,7 +80,7 @@
                         </div>
 
                     </div>
-                    <div class="result-content row no-gutters pt-3 pb-4" style="">
+                    <div class="result-content row no-gutters pt-3 pb-4">
                         <div class="col-12 col-md-4 p-0">
                             <ul class="list-unstyled">
                                 <li class="mb-3">
@@ -134,37 +143,44 @@
             <span class="pl-3 fs-16">Показать еще 20 льгот/субсидий</span>
         </div>
 
-        <div class="pagination d-flex justify-content-center align-items-center order-3">
-            {% if result.has_other_pages() %}
-                {% if result.has_previous() %}
-                    <a class=" pr-3" href="?page={{ result.previous_page_number() }}"> &lt;
-                        <span class="pl-2 d-none d-sm-inline-block">Предыдущая</span>
-                    </a>
-                    {% else %}
-                    <span class="pr-3 disabled">Старт</span>
-                {% endif %}
-                <span class="current">
-                    {% for item in result.paginator.page_range %}
-                        {% if result.number == item %}
-                            <a class="active d-inline-block fs-16 ml-3" href="?page={{ item }}">{{ item }}</a>
-                            {% else %}
-                            <a class="d-inline-block ml-3 " href="?page={{ item }}">{{ item }}</a>
-                        {% endif %}
-                    {% endfor %}
-                    {% if result.number == result.paginator.num_pages%}
+        <div class="col-12 mt-5 pagination d-flex justify-content-center align-items-center order-3">
+                {% if result.has_other_pages() %}
+                    {% if result.has_previous() %}
+                        <a class=" pr-3" href="?page={{ result.previous_page_number() }}"> &lt;
+                            <span class="pl-3 d-none d-sm-inline-block">Предыдущая</span>
+                        </a>
                         {% else %}
-                        <span class="pl-3 pr-3">...</span> <span>{{ result.paginator.num_pages }}</span>
+                        <span class="">
+                            <span> &lt; </span>
+                            <span class="pl-3">Предыдущая</span>
+                        </span>
                     {% endif %}
-                </span>
-                {% if result.has_next() %}
-                    <a class="pl-3 pr-3" href="?page={{ result.next_page_number() }}">
-                        <span class="pr-2 d-none d-sm-inline-block">Следующая</span> &gt;
-                    </a>
-                    {% else %}
-                    <span class="pl-3 "> Конец </span>
+                    <span class="current pl-3 pr-3">
+                        {% for item in result.paginator.page_range %}
+                            {% if result.number == item %}
+                                <a class="active d-inline-block fs-16 mr-3 ml-3" href="?page={{ item }}">{{ item }}</a>
+                                {% else %}
+                                <a class="item d-inline-block mr-1 ml-1" href="?page={{ item }}">{{ item }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if result.number == result.paginator.num_pages%}
+                            {% else %}
+                            <span class="pl-3 pr-3">...</span>
+                            <span class="pl-3 pr-3">{{ result.paginator.num_pages }}</span>
+                        {% endif %}
+                    </span>
+                    {% if result.has_next() %}
+                        <a class="pl-3 pr-3" href="?page={{ result.next_page_number() }}">
+                            <span class="pr-3 d-none d-sm-inline-block">Следующая</span> &gt;
+                        </a>
+                        {% else %}
+                        <span class="">
+                            <span class="pr-3">Следующая</span>
+                            <span> &gt; </span>
+                        </span>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
-        </div>
+            </div>
 
     </div>
 

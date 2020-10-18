@@ -215,7 +215,7 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 
 # Model translation
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
-MODELTRANSLATION_LANGUAGES = ('ru', 'en', 'uk',)
+MODELTRANSLATION_LANGUAGES = ('ru', 'uk',)
 MODELTRANSLATION_TRANSLATION_REGISTRY = 'translation'
 MODELTRANSLATION_TRANSLATION_FILES = ()
 
@@ -225,6 +225,7 @@ DATETIME_FORMATS = {
     3: '%d.%m.%Y',
     4: '%Y-%m-%d',
     5: '%Y-%m-%d %H:%M',
+    6: '{}'.format('%b %F %M', ' %H:%M'),
 }
 
 # THUMBNAIL

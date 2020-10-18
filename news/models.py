@@ -22,12 +22,12 @@ class News(models.Model):
     description = RichTextUploadingField(verbose_name="Новость")
     slug = models.SlugField(verbose_name='Slug', max_length=200, blank=True, null=True, unique=True)
     created_at = models.DateTimeField(verbose_name='Создано', auto_now_add=True)
-    updated_at = models.DateTimeField(verbose_name='Обновлено', auto_now=True)
+    # updated_at = models.DateTimeField(verbose_name='Обновлено', auto_now=True)
     published = models.BooleanField(verbose_name='Опубликовано', default=False)
     main_page = models.BooleanField(verbose_name='Главная страница', default=False)
     tags = models.ManyToManyField(Tag, blank=True, verbose_name='Теги', related_name='news_tags')
     author = models.CharField(max_length=500, null=True, verbose_name="Автор новости")
-    video_slug = models.CharField(max_length=2000, null=True, blank=True, verbose_name="ССылка на видео")
+    video_slug = models.CharField(max_length=2000, null=True, blank=True, verbose_name="Ссылка на видео")
 
     class Meta:
         verbose_name = 'Новость'

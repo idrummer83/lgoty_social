@@ -82,7 +82,7 @@
                                         </div>
                                         <span class="news-date">
                                             <i class="calendar mr-2"></i>
-                                            <span>{{ format_date(n.created_at )}}</span>
+                                            <span>{{ format_date(n.created_at, 3) }}</span>
                                         </span>
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@
                                         <a href="{{ url('news:news_item', args=[n.id]) }}">{{ n.title }}</a></div>
                                     <span class="news-date">
                                         <i class="calendar mr-2"></i>
-                                        <span>{{ format_date(n.created_at )}}</span>
+                                        <span>{{ format_date(n.created_at, 3) }}</span>
                                     </span>
                                 </div>
                             </div>
@@ -167,5 +167,29 @@
         </div>
 
     </div>
+
+    <script src="{{ static( 'js/jquery-ui.js' )}}"></script>
+    <script>
+            $(document).ready(function (){
+
+                var availableTags = [
+                      "Субсидии",
+                      "Департаминет",
+                      "Упраление",
+                      "Служба",
+                      "Льготы",
+                      "Группа",
+                      "Регион",
+                      "Документы",
+                      "Подразделение",
+                      "Отдел",
+                      "Режим"
+                    ];
+
+                $('.search-by-title').autocomplete({
+                    source: availableTags
+                });
+            });
+        </script>
 
 {% endblock %}

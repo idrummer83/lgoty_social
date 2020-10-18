@@ -95,7 +95,7 @@ def search_request(request):
 
     p_filter = PilgaFilter(request.GET, queryset=Privilege.objects.all())
 
-    paginator = Paginator(p_filter.qs.order_by('id'), 8)
+    paginator = Paginator(p_filter.qs.order_by('id'), 2)
     try:
         page = int(request.GET.get('page', '1'))
     except:
@@ -106,8 +106,21 @@ def search_request(request):
     except:
         result = paginator.page(paginator.num_pages)
 
+    privilege = Privilege.objects.all()
+    privilege_type = PrivilegeType.objects.all()
+    group = Group.objects.all()
+    subgroup = SubGroup.objects.all()
+    region = Region.objects.all()
+    document_type = DocumentType.objects.all()
+
     context = {
-        # 'result': p_filter,
+        'privilege': privilege,
+        'privilege_type': privilege_type,
+        'group': group,
+        'subgroup': subgroup,
+        'region': region,
+        'document_type': document_type,
+
         'result': result,
         'count': len(p_filter.qs),
     }

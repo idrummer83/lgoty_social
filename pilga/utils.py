@@ -95,37 +95,6 @@ def slugify(string):
     return st
 
 
-# def captcha_word():
-#     #TODO: optimize
-#     from reikartz.models import CaptchaDictionary       # avoiding circular imports
-#     selected_word = random.choice([*CaptchaDictionary.objects.values_list('word', flat=True)]).lower()
-#     return (
-#         (selected_word, selected_word)
-#     )
-
-
-# def check_form_captcha(func):
-#     from reikartz.forms import CaptchaForm
-#     def inner(request, *args, **kwargs):
-#         human = False
-#         form = CaptchaForm(request.POST)
-#
-#         if request.session.get('captcha_count', settings.MAXIMUM_SUCCESS_CAPTCHA) < settings.MAXIMUM_SUCCESS_CAPTCHA:
-#             human = True
-#             request.session['captcha_count'] += 1
-#
-#         if form.is_valid():
-#             human = True
-#             request.session['captcha_count'] = 0
-#
-#         if human:
-#             return func(request, *args, **kwargs)
-#
-#         return JsonResponse({'captcha': 'error'})
-#         # return JsonResponse({'captcha': 'fail'})
-#     return inner
-
-
 def format_date(date, datetime_format=None):
     if isinstance(datetime_format, int):
         datetime_format = settings.DATETIME_FORMATS.get(datetime_format)

@@ -11,15 +11,13 @@
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     {% for privilege in agencies.all() %}
                         {% if loop.first %}
-                            <div class="position-relative mb-4 w-100">
+                            <div class="position-relative mb-4 w-100 text-left">
                                 <i class="search position-absolute"></i>
-                                <input type="text" class="form-control pl-5" style="background: #FAFAFC;
-                            border: 1px solid #E7ECFA;min-height: 50px;
-                            border-radius: 4px;" placeholder="Поиск по названию">
+                                <input type="text" class="form-control pl-5 search-by-title w-100" placeholder="Поиск по названию">
                             </div>
                         {% endif %}
 
-                        <a class="d-none d-md-block  {% if loop.first %} active{% endif %}"
+                        <a class="d-none d-md-block {% if loop.first %} active{% endif %}"
                            id="v-pills-{{ privilege.id }}-tab"
                            data-toggle="pill" href="#v-pills-{{ privilege.id }}" role="tab"
                            aria-controls="v-pills-{{ privilege.id }}"
@@ -36,25 +34,26 @@
                                 </div>
                             </div>
                             <div class="col-12 col-lg-7">
-                                <div class="agency-wrap">
+                                <div class="agency-wrap d-flex flex-wrap h-100">
                                     <h3 class="mb-4">{{ privilege.building }}</h3>
                                     <div class="mb-3">
-                                        <strong>Адрес:</strong>
-                                        <span class="color-dark-2">{{ privilege.address }}</span>
+                                        <strong class="fs-22 pr-1">Адрес:</strong>
+                                        <span class="color-dark-2 fs-16">{{ privilege.address }}</span>
                                     </div>
                                     <div class="mb-3">
-                                        <strong>Департамент:</strong>
-                                        <span class="color-dark-2">{{ privilege.department }}</span>
+                                        <strong class="fs-22 pr-1">Департамент:</strong>
+                                        <span class="color-dark-2 fs-16">{{ privilege.department }}</span>
                                     </div>
                                     <div class="mb-3">
-                                        <strong>Режим работы:</strong>
-                                        <span class="color-dark-2">{{ privilege.work_time }}</span>
+                                        <strong class="fs-22 pr-1">Режим работы:</strong>
+                                        <span class="color-dark-2 fs-16">{{ privilege.work_time }}</span>
                                     </div>
                                     <div class="mb-4">
-                                        <strong>Контакты:</strong>
-                                        <span class="color-dark-2">{{ privilege.contact_person }}{{ privilege.agency.contact_phone }}</span>
+                                        <strong class="fs-22 pr-1">Контакты:</strong>
+                                        <span class="color-dark-2 fs-16">{{ privilege.contact_person }}{{ privilege.agency.contact_phone }}</span>
                                     </div>
-                                    <a class="button_short bg-dark-2 text-white" href="{{ url('institution_item', args=[privilege.agency]) }}">Все контакты</a>
+                                    <a class="button_short bg-dark-2 text-white d-inline-block mt-auto"
+                                       href="{{ url('institution_item', args=[privilege.agency]) }}">Все контакты</a>
                                 </div>
                             </div>
                         </div>
@@ -76,11 +75,32 @@
             </div>
         </div>
 
+        <script src="{{ static( 'js/jquery.js' )}}"></script>
+        <script src="{{ static( 'js/jquery-ui.js' )}}"></script>
+
         <script>
             $(document).ready(function (){
                 $('.institute-wrap').on('click', function (){
                     let tab_id = $(this).attr('id');
                         $('#v-pills-'+tab_id+'-tab').tab('show')
+                });
+
+                var availableTags = [
+                      "Субсидии",
+                      "Департаминет",
+                      "Упраление",
+                      "Служба",
+                      "Льготы",
+                      "Группа",
+                      "Регион",
+                      "Документы",
+                      "Подразделение",
+                      "Отдел",
+                      "Режим"
+                    ];
+
+                $('.search-by-title').autocomplete({
+                    source: availableTags
                 });
             });
         </script>
