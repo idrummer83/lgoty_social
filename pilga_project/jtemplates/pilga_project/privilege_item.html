@@ -6,22 +6,22 @@
 
         <div class="row no-gutters align-items-center mb-5">
             <div class="col-12 col-md-auto d-flex mb-3 pr-3">
-                <a href="#">Льготы и Субсидии</a>
+                <a href="{{ url('search') }}">Льготы и Субсидии</a>
                 <span class="pl-3 pr-3">
                     <i class="thumbnail"></i>
                 </span>
-                <a href="#">Военные льготы</a>
+                <a href="{{ url('search_request') }}">Результаты поиска</a>
                 <span class="pl-3 pr-3">
                     <i class="thumbnail"></i>
                 </span>
-                <a href="#">Ветерани війни</a>
+                <span>{{ privilege.title }}</span>
             </div>
             <div class="col-12 col-md-auto ml-auto">
                 <a class="button_short button-shadow border-radius text-white fs-16 bg-dark-1 d-inline-block" href="">Выгрузить в pdf</a>
             </div>
         </div>
 
-        {% for privilege in item.all() %}
+{#        {% for privilege in item.all() %}#}
 
             <div class="border-radius block-shadow mb-5">
 
@@ -197,7 +197,7 @@
             </div>
 
         </div>
-{% endfor %}
+{#{% endfor %}#}
 
     </div>
 

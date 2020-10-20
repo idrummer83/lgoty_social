@@ -128,9 +128,9 @@ def search_request(request):
 
 
 def privilege_item(request, slug):
-    item = Privilege.objects.filter(title=slug).prefetch_related(Prefetch('agency'))
+    item = Privilege.objects.filter(title=slug).prefetch_related(Prefetch('agency')).first()
     context = {
-        'item': item,
+        'privilege': item,
     }
     return render(request, 'pilga_project/privilege_item.html', context)
 

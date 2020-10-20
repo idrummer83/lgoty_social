@@ -6,11 +6,11 @@
 
         <div>
             <div class="d-flex mb-5">
-                <a href="#">Новини</a>
+                <a href="{{ url('news:index') }}">Новини</a>
                 <span class="pl-3 pr-3">
                     <i class="thumbnail"></i>
                 </span>
-                <a href="#">Країни світу повинні вийти з коронакризи сильнішими та підготовленими – Президент</a>
+                <span>{{ news_item.title }}</span>
             </div>
         </div>
     

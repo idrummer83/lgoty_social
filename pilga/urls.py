@@ -35,7 +35,6 @@ urlpatterns += i18n_patterns(
     path('download_csv', download_csv, name='download_csv'),
     path('about', about, name='about'),
     path('feedback', feedback, name='feedback'),
-    # path('send_feedback', send_feedback, name='send_feedback'),
     path('search_request', search_request, name='search_request'),
     path('institutions', institutions, name='institutions'),
     path('institution/<str:slug>/', institution_item, name='institution_item'),
