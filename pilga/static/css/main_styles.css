@@ -599,6 +599,10 @@ ul.ui-autocomplete li.ui-menu-item {
     line-height: 26px;
 }
 
+.last-news-wrap .news-header {
+    margin-bottom: 21.5px;
+}
+
 .news-header:hover a {
     color: #4155A9;
 }
@@ -614,7 +618,7 @@ ul.ui-autocomplete li.ui-menu-item {
 }
 
 .video-link-wrap {
-    margin-bottom: 36px;
+    margin-bottom: 41px;
     border-bottom: 2px solid #C0C4CF;
 }
 
@@ -626,7 +630,7 @@ ul.ui-autocomplete li.ui-menu-item {
 
 @media all and (min-width: 768px) {
     .last-news-wrap {
-        margin-bottom: 93px;
+        /*margin-bottom: 93px;*/
     }
 }
 

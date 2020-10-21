@@ -1,0 +1,24 @@
+
+<div class="last-news-wrap border-radius block-shadow">
+    {% for n in last_news %}
+        {% if loop.first %}
+        {% else %}
+            <div class="position-relative video-link-wrap">
+                <div class="position-absolute video text-white bg-dark-1 pl-3 pr-3 pt-2 pb-2" style="
+                border-bottom-left-radius: 6px;top: 0;right: 0;">видео</div>
+            </div>
+        {% endif %}
+        <div class="d-flex {% if loop.last %}{% else %}pb-3 mb-3{% endif %}">
+            <span class="news-list-num fs-34 line-height-1">{{ loop.index }}</span>
+            <div class="pl-3 pt-2 pr-3">
+                <div class="news-header font-weight-bold fs-16">
+                    <a href="{{ url('news:news_item', args=[n.id]) }}">{{ n.title }}</a>
+                </div>
+                <span class="news-date">
+                    <i class="calendar mr-2"></i>
+                    <span>{{ format_date(n.created_at, 3) }}</span>
+                </span>
+            </div>
+        </div>
+    {% endfor %}
+</div>

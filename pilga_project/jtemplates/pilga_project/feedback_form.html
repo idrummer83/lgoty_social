@@ -7,17 +7,17 @@
         <div class="position-relative mb-5">
             <h2 class="text-center header-page">Обратная связь</h2>
 
-            <div class="align-items-center position-fixed form-message">
-                <div class="col">
-                    <i class="info mr-3"></i>
-                </div>
-                {% if messages %}
+            {% if messages %}
+                <div class="align-items-center position-fixed form-message">
+                    <div class="col">
+                        <i class="info mr-3"></i>
+                    </div>
                     {% for message in messages %}
-                    <div class="fs-14">{{ message }}</div>
+                        <div class="fs-14">{{ message }}</div>
                     {% endfor %}
-                {% endif %}
-            </div>
-        </div>
+                    </div>
+                </div>
+            {% endif %}
 
         <div class="block-search block-shadow border-radius p-5">
 
