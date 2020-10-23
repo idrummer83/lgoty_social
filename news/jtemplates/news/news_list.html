@@ -126,7 +126,6 @@
 
     </div>
 
-{#    <script src="{{ static( 'js/jquery.js' )}}"></script>#}
     <script src="{{ static( 'js/jquery-ui.js' )}}"></script>
     <script src="{{ static( 'js/datapicker-ru.js' )}}"></script>
 
@@ -134,14 +133,23 @@
   <script>
   $( function() {
     $( "#datepicker" ).datepicker(
-        {
-      changeMonth: true,
-      changeYear: true
-    },
-        $.datepicker.regional[ "ru" ],
-    );
-  } );
-  </script>
+            {
+                changeMonth: true,
+                changeYear: true
+            },
+            $.datepicker.regional[ "ru" ],
+        );
+    }
+  );
+  $(document).mouseup(function(e)
+    {
+        var container = $("#collapse_datapicker");
 
+        if (!container.is(e.target) && container.has(e.target).length === 0)
+        {
+            container.collapse('hide');
+        }
+    });
+  </script>
 
 {% endblock %}
