@@ -24,7 +24,7 @@
                             <span class="text-white pr-2 fs-16">+38 050 900 00 00</span>
                             <i class="arr-down"></i>
                         </span>
-                        <div class="dropdown-menu border-0 p-0" aria-labelledby="phones">
+                        <div class="dropdown-menu p-0" aria-labelledby="phones">
                             <ul class="list-unstyled m-0 p-4" style="width: 200px">
                                 <li class="mb-3 pb-3" style="border-bottom: 1px solid #c4c4c4;">
                                     <a class="fs-16" href="tel:+380509000000">+38 050 900 00 00</a>
@@ -56,7 +56,7 @@
                     <span class="text-white pl-3 pr-2 fs-14 pt-1">{{ settings.LANGUAGES_VIEWS.get(request.LANGUAGE_CODE, '') }}</span>
                         <i class="arr-down mt-1"></i>
                     </span>
-                    <div class="dropdown-menu border-0 p-0" aria-labelledby="language_menu">
+                    <div class="dropdown-menu p-0" aria-labelledby="language_menu">
                         {% for l in settings.LANGUAGES %}
                             {% if request.LANGUAGE_CODE != l[0] %}
                                 <a href="/{{ l[0] }}{{ request.path[3:] }}" class="item d-flex align-items-center justify-content-center" style="width: 120px; height: 54px;">
@@ -148,18 +148,8 @@
                             </ul>
                         </div>
                     </div>
-{#                    <div class="d-flex align-items-center">#}
-{#                        <img class="" src="{{ static('img/icons/phone_square_icon.svg') }}" alt="">#}
-{#                        <a class="pr-1 fs-16" href="tel:+380509000000">+38 050 900 00 00</a>#}
-{#                        <i class="arr-down-black"></i>#}
-{#                    </div>#}
                 </div>
-                <div class="col-4 p-0 ">
-{#                    <div class="d-flex align-items-center">#}
-{#                        <i class="flag-ukr"></i>#}
-{#                        <span class="pl-3 pr-2 fs-14">Укр</span>#}
-{#                        <i class="arr-down-black"></i>#}
-{#                    </div>#}
+                <div class="col-4 p-0">
                     <div class="dropdown">
                         <span id="language_menu_mob" class="d-flex align-items-center dropdown-btn" data-toggle="dropdown"
                               aria-haspopup="true" aria-expanded="false">
@@ -171,7 +161,7 @@
                         <span class="pl-3 pr-2 fs-14 pt-1">{{ settings.LANGUAGES_VIEWS.get(request.LANGUAGE_CODE, '') }}</span>
                             <i class="arr-down mt-1"></i>
                         </span>
-                        <div class="dropdown-menu border-0 p-0 position-relative" aria-labelledby="language_menu_mob">
+                        <div class="dropdown-menu p-0 position-relative" aria-labelledby="language_menu_mob">
                             {% for l in settings.LANGUAGES %}
                                 {% if request.LANGUAGE_CODE != l[0] %}
                                     <a href="/{{ l[0] }}{{ request.path[3:] }}" class="item d-flex align-items-center justify-content-center" style="width: 120px; height: 54px;">

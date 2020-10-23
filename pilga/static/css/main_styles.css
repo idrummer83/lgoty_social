@@ -623,7 +623,6 @@ ul.ui-autocomplete li.ui-menu-item {
 
 .video-link-wrap {
     margin-bottom: 41px;
-    /*border-bottom: 2px solid #C0C4CF;*/
     border-bottom: 2px solid rgba(192, 196, 207, .3);
 }
 
@@ -631,12 +630,6 @@ ul.ui-autocomplete li.ui-menu-item {
     border-bottom-left-radius: 6px;
     top: 0;
     right: 0;
-}
-
-@media all and (min-width: 768px) {
-    .last-news-wrap {
-        /*margin-bottom: 93px;*/
-    }
 }
 
 .pagination .item,
@@ -781,13 +774,6 @@ html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:activ
 }
 .ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
     display: none;
-}
-
-#ui-datepicker-div {
-    /*border: 2px solid #e5ebf5;*/
-        /*left: auto !important;*/
-    /*right: 74px !important;*/
-    /*padding: 15px !important;*/
 }
 
 .ui-datepicker-title {
