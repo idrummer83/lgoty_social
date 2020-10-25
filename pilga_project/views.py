@@ -8,7 +8,7 @@ import csv
 
 from .models import Slider, Privilege, PrivilegeType, Group, SubGroup, Region, DocumentType, IssuedBy, Agency,\
     About, Subscribe
-from .forms import SubscribeForm, FeedBackForm
+from .forms import SubscribeForm, FeedBackForm, AgencyForm
 from news.models import News
 
 from .filters import PilgaFilter
@@ -136,6 +136,17 @@ def privilege_item(request, slug):
 
 
 def institutions(request):
+
+    if request.method == 'GET':
+        form = AgencyForm(request.GET or None)
+        if form.is_valid():
+            search_building = request.GET.get('building', None)
+            agencies = Agency.objects.filter(building__icontains=search_building)
+            context = {
+                'agencies': agencies
+            }
+            return render(request, 'pilga_project/agencies_list.html', context)
+
     agencies = Agency.objects.all()
     context = {
         'agencies': agencies

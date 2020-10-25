@@ -21,7 +21,7 @@ class News(models.Model):
     title = models.CharField(max_length=250, verbose_name="Заголовок новости")
     description = RichTextUploadingField(verbose_name="Новость")
     slug = models.SlugField(verbose_name='Slug', max_length=200, blank=True, null=True, unique=True)
-    created_at = models.DateTimeField(verbose_name='Создано', auto_now_add=True)
+    created_at = models.DateTimeField(verbose_name='Создано')
     # updated_at = models.DateTimeField(verbose_name='Обновлено', auto_now=True)
     published = models.BooleanField(verbose_name='Опубликовано', default=False)
     main_page = models.BooleanField(verbose_name='Главная страница', default=False)

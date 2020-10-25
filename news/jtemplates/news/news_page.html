@@ -1,0 +1,159 @@
+{% extends 'pilga_project/base_with_slider.html' %}
+
+{% block page %}
+
+    <div class="container margin-top-80">
+    
+        <h2 class="text-center header-page">Новости</h2>
+
+        <div class="row no-gutters align-items-center" style="margin-bottom: 50px;">
+            <div class="col-12 col-md-6 p-0 mb-3 mb-md-0">
+                <a class="d-inline-block pr-4 mb-3  mb-md-0" href="#">
+                    <strong class="pb-1" style="border-bottom: 2px solid #1B1D1F;">Закон</strong></a>
+                <a class="d-inline-block pr-4 mb-3  mb-md-0" href="#">Льготы</a>
+                <a class="d-inline-block pr-4 mb-3  mb-md-0" href="#">Субсидии</a>
+                <a href="#">Изменения</a>
+            </div>
+            <div class="col-12 col-md-6 d-flex justify-content-md-end align-items-center position-relative">
+                <div class="pr-3 mr-3" style="border-right: 1px solid #E2E5EC;">
+{#                    <i class="search_2"></i>#}
+                    <form action="{{ url('news:index') }}" method="GET">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                        <div class="position-relative text-left">
+                                <i class="search position-absolute"></i>
+                                <input type="text" name="title" class="form-control pl-5 search-by-title w-100"
+                                       placeholder="Поиск по названию">
+                            </div>
+                    </form>
+                </div>
+                <div class="position-relative">
+                    <a data-toggle="collapse" href="#collapse_datapicker" role="button" aria-expanded="false"
+                       aria-controls="collapse_datapicker">
+                        <i class="calendar_2"></i>
+                        <span class="pl-3">Фильтр по дате</span>
+                    </a>
+                </div>
+
+                <div class="collapse" id="collapse_datapicker">
+                    <div class="card card-body p-0 border-0 position-absolute" style="">
+                        <div id="datepicker"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-8 order-1 order-md-0">
+                <div class="row" id="search_date_result">
+                    {% include 'news/news_list.html' %}
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 order-0 ">
+                {% include 'news/last_news_list.html' %}
+
+                <div class="d-none d-md-block col-12 p-0 mb-4">
+                    <div class="d-block block-shadow border-radius overflow-hidden">
+                        {% for img in one_news.news_images.all() %}
+                            <div class="news-img-wrap" style="
+                                    background: url('{{ img.image.url }}') 0 0 no-repeat; background-size: cover;">
+                            </div>
+                        {% endfor %}
+                        <div class="news-wrap">
+                            <div class="news-header font-weight-bold fs-16">
+                                <a href="{{ url('news:news_item', args=[one_news.id]) }}">{{ one_news.title }}</a>
+                            </div>
+                            <span class="news-date">
+                                <i class="calendar mr-2"></i>
+                                <span>{{ format_date(one_news.created_at, 3) }}</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 mt-5 pagination d-flex justify-content-center align-items-center order-3">
+                {% if news.has_other_pages() %}
+                    {% if news.has_previous() %}
+                        <a class=" pr-3" href="?page={{ news.previous_page_number() }}"> &lt;
+                            <span class="pl-3 d-none d-sm-inline-block">Предыдущая</span>
+                        </a>
+                        {% else %}
+                        <span class="">
+                            <span> &lt; </span>
+                            <span class="pl-3">Предыдущая</span>
+                        </span>
+                    {% endif %}
+                    <span class="current pl-3 pr-3">
+                        {% for item in news.paginator.page_range %}
+                            {% if news.number == item %}
+                                <a class="active d-inline-block fs-16 mr-3 ml-3" href="?page={{ item }}">{{ item }}</a>
+                                {% else %}
+                                <a class="item d-inline-block mr-1 ml-1" href="?page={{ item }}">{{ item }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if news.number == news.paginator.num_pages%}
+                            {% else %}
+                            <span class="pl-3 pr-3">...</span>
+                            <span class="pl-3 pr-3">{{ news.paginator.num_pages }}</span>
+                        {% endif %}
+                    </span>
+                    {% if news.has_next() %}
+                        <a class="pl-3 pr-3" href="?page={{ news.next_page_number() }}">
+                            <span class="pr-3 d-none d-sm-inline-block">Следующая</span> &gt;
+                        </a>
+                        {% else %}
+                        <span class="">
+                            <span class="pr-3">Следующая</span>
+                            <span> &gt; </span>
+                        </span>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+    <script src="{{ static( 'js/jquery-ui.js' )}}"></script>
+    <script src="{{ static( 'js/datapicker-ru.js' )}}"></script>
+
+
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker(
+            {
+                changeMonth: true,
+                changeYear: true,
+                {#altFormat: "dd-mm-yy",#}
+                dateFormat: "dd-mm",
+                onSelect: function (date) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ url("news:news_date") }}',
+                        data: {
+                            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                            'news_date': date
+                        },
+                        success: function (data) {
+                            $('#search_date_result').html(data)
+                        }
+                    })
+                }
+            },
+            $.datepicker.regional[ "ru" ],
+        );
+    }
+  );
+
+  $(document).mouseup(function(e)
+    {
+        var container = $("#collapse_datapicker");
+
+        if (!container.is(e.target) && container.has(e.target).length === 0)
+        {
+            container.collapse('hide');
+        }
+    });
+  </script>
+
+{% endblock %}

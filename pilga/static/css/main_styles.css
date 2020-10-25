@@ -420,8 +420,6 @@ header {
     padding: 20px 10px;
 }
 
-
-
 .list-item.active {
     font-weight: bold;
 }
@@ -467,6 +465,20 @@ header {
 
 /**/
 
+/*.slider-gradient {*/
+/*!* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#000000+0,ffffff+99,ffffff+99,ffffff+100 *!*/
+/*background: #000000; !* Old browsers *!*/
+/*background: -moz-linear-gradient(left,  hsla(0,0%,0%,1) 0%, hsla(0,0%,100%,1) 99%, hsla(0,0%,100%,1) 99%, hsla(0,0%,100%,1) 100%); !* FF3.6-15 *!*/
+/*background: -webkit-linear-gradient(left,  hsla(0,0%,0%,1) 0%,hsla(0,0%,100%,1) 99%,hsla(0,0%,100%,1) 99%,hsla(0,0%,100%,1) 100%); !* Chrome10-25,Safari5.1-6 *!*/
+/*background: linear-gradient(to right,  hsla(0,0%,0%,1) 0%,hsla(0,0%,100%,1) 99%,hsla(0,0%,100%,1) 99%,hsla(0,0%,100%,1) 100%); !* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ *!*/
+/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff',GradientType=1 ); !* IE6-9 *!*/
+
+/*}*/
+
+/*.slick-slide {*/
+/*    z-index: -1 !important;*/
+/*}*/
+
 .slider-wrap {
     height: 410px;
 }
@@ -479,9 +491,6 @@ header {
     line-height: 34px;
 }
 
-.slide-control {
-    /*margin: 66px 0 120px 0;*/
-}
 
 .slide-info .header {
     margin-bottom: 40px;
@@ -539,6 +548,11 @@ header {
     border: 1px solid #E7ECFA;
     background: #FAFAFC;
     border-radius: 4px;
+}
+
+.search-by-title:focus {
+    color: #1B1D1F;
+    font-family: 'RubikMedium', sans-serif;
 }
 
 .ui-menu.ui-widget.ui-widget-content.ui-autocomplete {

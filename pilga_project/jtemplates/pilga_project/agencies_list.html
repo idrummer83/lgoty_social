@@ -11,10 +11,13 @@
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     {% for privilege in agencies.all() %}
                         {% if loop.first %}
-                            <div class="position-relative mb-4 w-100 text-left">
-                                <i class="search position-absolute"></i>
-                                <input type="text" class="form-control pl-5 search-by-title w-100" placeholder="Поиск по названию">
-                            </div>
+                            <form action="{{ url('institutions') }}" method="GET">
+                                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                                <div class="position-relative mb-4 w-100 text-left">
+                                    <i class="search position-absolute"></i>
+                                    <input type="text" name="building" class="form-control pl-5 search-by-title w-100" placeholder="Поиск по названию">
+                                </div>
+                            </form>
                         {% endif %}
 
                         <a class="d-none d-md-block {% if loop.first %} active{% endif %}"

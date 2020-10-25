@@ -1,4 +1,4 @@
-from .models import Subscribe, FeedBack
+from .models import Subscribe, FeedBack, Agency
 
 from django.core.validators import validate_email, validate_integer
 from django.core.exceptions import ValidationError
@@ -40,3 +40,10 @@ class SubscribeForm(ModelForm):
         if validate_integer(phone):
             raise ValidationError('Введите правильное поле с phone')
         return phone
+
+
+class AgencyForm(ModelForm):
+
+    class Meta:
+        model = Agency
+        fields = ['building']

@@ -4,12 +4,13 @@
 {% block content %}
 
     {% block slider %}
-        <div class="" style="overflow: hidden;">
-            <div class="slider-container">
+        <div class="slider-gradient" style="overflow: hidden;">
+            <div class="slider-container" style="">
                 {% for slide in main_slider %}
-                    <div class="slider-wrap" style="background: url({{ slide.image.url }}) 50% 50% / cover no-repeat;">
+                    <div class="slider-wrap" style="background-image:
+                            linear-gradient(to right,  hsla(0,0%,0%,0.8) 0%,hsla(0,0%,100%,0.15) 99%,hsla(0,0%,100%,0.15) 100%),
+                            url({{ slide.image.url }});background-size: cover;background-repeat: no-repeat;">
                         <div class="container h-100">
-
                             <div class="header-wrap row flex-column flex-sm-row mt-sm-5 pt-3 ml-0 mr-0 mb-5 mb-sm-4">
                                 <div class="slide-info header fs-22 font-weight-bold text-white mr-auto order-1 order-md-0 mt-auto mt-sm-0">{{ slide.description|safe }}</div>
                                 <div class="text-white text-right order-0 order-md-1 ml-auto">
@@ -71,7 +72,7 @@
                             </div>
 
                         </div>
-                    </div>
+                        </div>
                 {% endfor %}
 
             </div>
@@ -89,7 +90,7 @@
               slidesToShow: 1,
               slidesToScroll: 1,
               autoplaySpeed: 7000,
-              autoplay: true,
+              {#autoplay: true,#}
               dots: false,
                 fade: true,
               {#arrows : false,#}
