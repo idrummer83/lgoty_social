@@ -2,159 +2,157 @@
 
 {% block page %}
 
-    <div class="container margin-top-80">
+    <div class="container margin-top-40">
 
-        <div class="row no-gutters align-items-center mb-5">
-            <div class="col-12 col-md-auto d-flex mb-3 pr-3">
+        <div class="row no-gutters align-items-center mb-3 mb-sm-5">
+            <div class="col-12 col-md-auto d-flex flex-wrap mb-3 pr-sm-3">
                 <a href="{{ url('search') }}">Льготы и Субсидии</a>
                 <span class="pl-3 pr-3">
                     <i class="thumbnail"></i>
                 </span>
-                <a href="{{ url('search_request') }}">Результаты поиска</a>
+                <a class="" href="{{ url('search_request') }}">Результаты поиска</a>
                 <span class="pl-3 pr-3">
                     <i class="thumbnail"></i>
                 </span>
                 <span>{{ privilege.title }}</span>
             </div>
-            <div class="col-12 col-md-auto ml-auto">
+            <div class="d-none d-sm-block col-12 col-md-auto ml-auto">
                 <a class="button_short button-shadow border-radius text-white fs-16 bg-dark-1 d-inline-block" href="">Выгрузить в pdf</a>
             </div>
         </div>
 
-{#        {% for privilege in item.all() %}#}
+        <div class="border-radius block-shadow mb-5">
 
-            <div class="border-radius block-shadow mb-5">
+            <div class="mb-2 mb-sm-4 pl-4 pl-sm-5 pt-5 pr-4 pr-sm-5 pb-4" style="border-bottom: 2px solid #EDEDED;">
+                <h3 class="mb-4">{{ privilege.title }}</h3>
 
-                <div class="mb-4 pl-5 pt-5 pr-5 pb-4" style="border-bottom: 2px solid #EDEDED;">
-                    <h3 class="mb-4">{{ privilege.title }}</h3>
-
-                    <div class="mb-4 color-dark-2 fs-16">
-                        {{ privilege.description|safe }}
-                    </div>
+                <div class="color-dark-2 fs-16 mb-0">
+                    {{ privilege.description|safe }}
                 </div>
-
-                <div class="privilege_item row m-0 pl-5 pr-5 pt-3 pb-3">
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Тип:</strong>
-                        <span class="color-dark-2">{{ privilege.privilege_type }}</span>
-                    </div>
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Сумма:</strong>
-                        <span class="color-dark-2">{{ privilege.value }}</span>
-                    </div>
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Период выплаты с:</strong>
-                        <span class="color-dark-2">{{ privilege.period_start }}</span>
-                    </div>
-                </div>
-
-                <div class="privilege_item row m-0 pl-5 pr-5 pt-3 pb-3">
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong>Группа:</strong>
-                        <span class="color-dark-2">{{ privilege.group }}</span>
-                    </div>
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Документы:</strong>
-                            {% for doc in privilege.required_document.all() %}
-                                <span class="color-dark-2">{{ doc }}</span>
-                            {% endfor %}
-                    </div>
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong>Период выплаты до:</strong>
-                        <span class="color-dark-2">{{ privilege.period_end }}</span>
-                    </div>
-                </div>
-
-                <div class="privilege_item row m-0 pl-5 pr-5 pt-3 pb-3">
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Подгруппа:</strong>
-                        <span class="color-dark-2">{{ privilege.subgroup }}</span>
-                    </div>
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Сроки:</strong>
-                        <span class="color-dark-2">{{ privilege.period_revision }}</span>
-                    </div>
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Критерии:</strong>
-                        <span class="color-dark-2"></span>
-                    </div>
-                </div>
-
-                <div class="privilege_item row m-0 pl-5 pr-5 pt-3 pb-3">
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Название:</strong>
-                        <span class="color-dark-2">{{ privilege.title }}</span>
-                    </div>
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Регион:</strong>
-                        <span class="color-dark-2">{{ privilege.region }}</span>
-                    </div>
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Период/Месяц пересмотра:</strong>
-                        <span class="color-dark-2">{{ privilege.period_revision }}</span>
-                    </div>
-                </div>
-
-                <div class="privilege_item row m-0 pl-5 pr-5 pt-3 pb-3">
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Нормативный документ:</strong>
-                        <span class="color-dark-2">{{ privilege.agency }}</span>
-                    </div>
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Тип нормативного документа:</strong>
-                        <span class="color-dark-2">{{ privilege.document_type }}</span>
-                    </div>
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Одноразовая выплата:</strong>
-                        <span class="color-dark-2">
-                            {% if privilege.single_pay == 'True' %}
-                                Да
-                                {% else %}
-                                Нет
-                            {% endif %}
-                        </span>
-                    </div>
-                </div>
-
-                <div class="privilege_item row m-0 pl-5 pr-5 pt-3 pb-3">
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Орган рассмотрения:</strong>
-                        <span class="color-dark-2">{{ privilege.agency }}</span>
-                    </div>
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Номер нормативного документа:</strong>
-                        <span class="color-dark-2">{{ privilege.number }}</span>
-                    </div>
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Общенациональный:</strong>
-                        <span class="color-dark-2">
-                            {% if privilege.national == 'True' %}
-                                Да
-                                {% else %}
-                                Нет
-                            {% endif %}
-                        </span>
-                    </div>
-                </div>
-
-                <div class="privilege_item row m-0 pl-5 pr-5 pt-3 pb-3">
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">WEB Ссылка на официальный источник:</strong>
-                        <span class="color-dark-2" style="word-break: break-all;">{{ privilege.slug }}</span>
-                    </div>
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Дата нормативного документа:</strong>
-                        <span class="color-dark-2">{{ privilege.date }}</span>
-                    </div>
-                    <div class="col-12 col-md-4 fs-16">
-                        <strong class="pr-2">Кем выдан:</strong>
-                        <span class="color-dark-2">{{ privilege.issued }}</span>
-                    </div>
-                </div>
-
             </div>
 
-        <h3 class="mb-4">Учреждение</h3>
+            <div class="privilege_item row m-0 pl-4 pl-sm-5 pr-4 pt-3 pb-3">
+                <div class="col-12 col-md-4 fs-16 pl-0">
+                    <strong class="pr-2">Тип:</strong>
+                    <span class="color-dark-2">{{ privilege.privilege_type }}</span>
+                </div>
+                <div class="col-12 col-md-4 fs-16 pl-0">
+                    <strong class="pr-2">Сумма:</strong>
+                    <span class="color-dark-2">{{ privilege.value }}</span>
+                </div>
+                <div class="col-12 col-md-4 fs-16 p-0">
+                    <strong class="pr-2">Период выплаты с:</strong>
+                    <span class="color-dark-2">{{ privilege.period_start }}</span>
+                </div>
+            </div>
+
+            <div class="privilege_item row m-0 pl-4 pl-sm-5 pr-4 pt-3 pb-3">
+                <div class="col-12 col-md-4 fs-16 pl-0">
+                    <strong>Группа:</strong>
+                    <span class="color-dark-2">{{ privilege.group }}</span>
+                </div>
+                <div class="col-12 col-md-4 fs-16 pl-0">
+                    <strong class="pr-2">Документы:</strong>
+                        {% for doc in privilege.required_document.all() %}
+                            <span class="color-dark-2">{{ doc }}</span>
+                        {% endfor %}
+                </div>
+                <div class="col-12 col-md-4 fs-16 p-0">
+                    <strong>Период выплаты до:</strong>
+                    <span class="color-dark-2">{{ privilege.period_end }}</span>
+                </div>
+            </div>
+
+            <div class="privilege_item row m-0 pl-4 pl-sm-5 pr-4 pt-3 pb-3">
+                <div class="col-12 col-md-4 fs-16 pl-0">
+                    <strong class="pr-2">Подгруппа:</strong>
+                    <span class="color-dark-2">{{ privilege.subgroup }}</span>
+                </div>
+                <div class="col-12 col-md-4 fs-16 pl-0">
+                    <strong class="pr-2">Сроки:</strong>
+                    <span class="color-dark-2">{{ privilege.period_revision }}</span>
+                </div>
+                <div class="col-12 col-md-4 fs-16 p-0">
+                    <strong class="pr-2">Критерии:</strong>
+                    <span class="color-dark-2"></span>
+                </div>
+            </div>
+
+            <div class="privilege_item row m-0 pl-4 pl-sm-5 pr-4 pt-3 pb-3">
+                <div class="col-12 col-md-4 fs-16 pl-0">
+                    <strong class="pr-2">Название:</strong>
+                    <span class="color-dark-2">{{ privilege.title }}</span>
+                </div>
+                <div class="col-12 col-md-4 fs-16 pl-0">
+                    <strong class="pr-2">Регион:</strong>
+                    <span class="color-dark-2">{{ privilege.region }}</span>
+                </div>
+                <div class="col-12 col-md-4 fs-16 p-0">
+                    <strong class="pr-2">Период/Месяц пересмотра:</strong>
+                    <span class="color-dark-2">{{ privilege.period_revision }}</span>
+                </div>
+            </div>
+
+            <div class="privilege_item row m-0 pl-4 pl-sm-5 pr-4 pt-3 pb-3">
+                <div class="col-12 col-md-4 fs-16 pl-0">
+                    <strong class="pr-2">Нормативный документ:</strong>
+                    <span class="color-dark-2">{{ privilege.agency }}</span>
+                </div>
+                <div class="col-12 col-md-4 fs-16 pl-0">
+                    <strong class="pr-2">Тип нормативного документа:</strong>
+                    <span class="color-dark-2">{{ privilege.document_type }}</span>
+                </div>
+                <div class="col-12 col-md-4 fs-16 p-0">
+                    <strong class="pr-2">Одноразовая выплата:</strong>
+                    <span class="color-dark-2">
+                        {% if privilege.single_pay == 'True' %}
+                            Да
+                            {% else %}
+                            Нет
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+
+            <div class="privilege_item row m-0 pl-4 pl-sm-5 pr-4 pt-3 pb-3">
+                <div class="col-12 col-md-4 fs-16 pl-0">
+                    <strong class="pr-2">Орган рассмотрения:</strong>
+                    <span class="color-dark-2">{{ privilege.agency }}</span>
+                </div>
+                <div class="col-12 col-md-4 fs-16 pl-0">
+                    <strong class="pr-2">Номер нормативного документа:</strong>
+                    <span class="color-dark-2">{{ privilege.number }}</span>
+                </div>
+                <div class="col-12 col-md-4 fs-16 p-0">
+                    <strong class="pr-2">Общенациональный:</strong>
+                    <span class="color-dark-2">
+                        {% if privilege.national == 'True' %}
+                            Да
+                            {% else %}
+                            Нет
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+
+            <div class="privilege_item row m-0 pl-4 pl-sm-5 pr-4 pt-3 pb-3">
+                <div class="col-12 col-md-4 fs-16 pl-0">
+                    <strong class="pr-2">WEB Ссылка на официальный источник:</strong>
+                    <span class="color-dark-2" style="word-break: break-all;">{{ privilege.slug }}</span>
+                </div>
+                <div class="col-12 col-md-4 fs-16 pl-0">
+                    <strong class="pr-2">Дата нормативного документа:</strong>
+                    <span class="color-dark-2">{{ privilege.date }}</span>
+                </div>
+                <div class="col-12 col-md-4 fs-16 p-0">
+                    <strong class="pr-2">Кем выдан:</strong>
+                    <span class="color-dark-2">{{ privilege.issued }}</span>
+                </div>
+            </div>
+
+        </div>
+
+        <h3 class="mb-4 fs-18">Учреждение</h3>
 
         <div class="row">
 
@@ -166,22 +164,22 @@
                     </div>
                     <div class="col-12 col-sm-7">
                         <div class="agency-wrap d-flex flex-wrap h-100">
-                            <h3 class="mb-4 header-page">{{ privilege.agency.building }}</h3>
-                            <div class="mb-3">
-                                <strong class="fs-22 pr-1">Адрес:</strong>
-                                <span class="color-dark-2 fs-16">{{ privilege.agency.address }}</span>
+                            <h3 class="mb-4 fs-18">{{ privilege.agency.building }}</h3>
+                            <div class="mb-3 w-100">
+                                <strong class="fs-14 pr-1">Адрес:</strong>
+                                <span class="color-dark-2 fs-14">{{ privilege.agency.address }}</span>
                             </div>
-                            <div class="mb-3">
-                                <strong class="fs-22 pr-1">Департамент:</strong>
-                                <span class="color-dark-2 fs-16">{{ privilege.agency.department }}</span>
+                            <div class="mb-3 w-100">
+                                <strong class="fs-14 pr-1">Департамент:</strong>
+                                <span class="color-dark-2 fs-14">{{ privilege.agency.department }}</span>
                             </div>
-                            <div class="mb-3">
-                                <strong class="fs-22 pr-1">Режим работы:</strong>
-                                <span class="color-dark-2 fs-16">{{ privilege.agency.work_time }}</span>
+                            <div class="mb-3 w-100">
+                                <strong class="fs-14 pr-1">Режим работы:</strong>
+                                <span class="color-dark-2 fs-14">{{ privilege.agency.work_time }}</span>
                             </div>
                             <div class="mb-4">
-                                <strong class="fs-22 pr-1">Контакты:</strong>
-                                <span class="color-dark-2 fs-16">{{ privilege.agency.contact_person }}{{ privilege.agency.contact_phone }}</span>
+                                <strong class="fs-14 pr-1">Контакты:</strong>
+                                <span class="color-dark-2 fs-14">{{ privilege.agency.contact_person }}{{ privilege.agency.contact_phone }}</span>
                             </div>
                             <a class="button_short bg-dark-2 text-white d-inline-block mt-auto"
                                href="{{ url('institution_item', args=[privilege.agency]) }}">Все контакты</a>
@@ -197,7 +195,6 @@
             </div>
 
         </div>
-{#{% endfor %}#}
 
     </div>
 

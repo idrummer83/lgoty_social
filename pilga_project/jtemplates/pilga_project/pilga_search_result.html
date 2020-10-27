@@ -2,23 +2,23 @@
 
 {% block page %}
 
-    <div class="container margin-top-80">
+    <div class="container margin-top-40">
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex flex-wrap justify-content-md-between align-items-center mb-4">
 
             <div>
-                <div class="d-flex mb-5">
+                <div class="d-flex flex-wrap mb-4 mb-md-0">
                     <a href="{{ url('search') }}">Льготы и Субсидии</a>
                     <span class="pl-3 pr-3">
                         <i class="thumbnail"></i>
                     </span>
-                    <span>Результаты поиска</span>
+                    <span class="d-block d-sm-inline">Результаты поиска</span>
                 </div>
             </div>
 
-            <div>
+            <div class="col-12 col-md-auto p-0">
                 <!-- Button trigger modal -->
-                <button type="button" class="border-0 bg-transparent search_advanced" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="border-0 bg-transparent search_advanced p-0" data-toggle="modal" data-target="#exampleModal">
                     <i class="search_3"></i>
                     <span class="pl-2">Разширеный поиск</span>
                 </button>
@@ -49,9 +49,9 @@
 
         </div>
 
-        <div class="d-flex justify-content-between align-items-center mb-5">
+        <div class="d-flex flex-wrap justify-content-sm-between align-items-center mb-5">
             <div class="font-weight-bold fs-18">Найдено {{ count }} льгот</div>
-            <a href="{{ url('download_csv') }}" class="button_short button-shadow bg-dark-1 text-white">Выгрузить в pdf</a>
+            <a href="{{ url('download_csv') }}" class="d-none d-sm-inline-blockbutton_short button-shadow bg-dark-1 text-white">Выгрузить в pdf</a>
         </div>
 
         <div class="mb-4 pb-4">

@@ -131,11 +131,18 @@
                 </ul>
             <div class="d-md-none row d-flex align-items-center m-0 mob-additional">
                 <span class="col-12 p-0 fs-16">Перезвоните мне</span>
-                <div class=" col-8 p-0">
+                <div class="col-8 p-0">
                     <div class="dropdown">
                         <span id="phones_mob" class="d-flex align-items-center dropdown-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <svg width="57" height="65" viewBox="0 0 57 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g filter="url(#filter0_d)">
+                                <path d="M20 22C20 18.6863 22.6863 16 26 16H31C34.3137 16 37 18.6863 37 22V35C37 38.3137 34.3137 41 31 41H26C22.6863 41 20 38.3137 20 35V22Z" fill="white"/>
+                                </g>
+                                <rect x="16.5" y="16.5" width="24" height="24" rx="5.5" fill="#FAFAFC" stroke="#E2E5EC"/>
+                                <path d="M32.7918 30.2743C32.2066 30.2743 31.632 30.1827 31.0874 30.0028C30.8206 29.9118 30.4926 29.9953 30.3297 30.1625L29.2549 30.9739C28.0085 30.3085 27.2407 29.541 26.5844 28.3039L27.3719 27.2571C27.5765 27.0528 27.6499 26.7543 27.562 26.4743C27.3813 25.9269 27.2894 25.3525 27.2894 24.767C27.2895 24.3441 26.9454 24 26.5225 24H24.767C24.3441 24 24 24.3441 24 24.767C24 29.6149 27.9439 33.5588 32.7918 33.5588C33.2147 33.5588 33.5588 33.2147 33.5588 32.7918V31.0412C33.5588 30.6183 33.2147 30.2743 32.7918 30.2743Z" fill="#081223"/>
+                            </svg>
                             <span class="pr-2 fs-16">+38 050 900 00 00</span>
-                            <i class="arr-down"></i>
+                            <i class="arr-down-black"></i>
                         </span>
                         <div class="dropdown-menu border-0 p-0 position-relative" aria-labelledby="phones_mob">
                             <ul class="list-unstyled m-0 p-4" style="width: 200px">
@@ -149,7 +156,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4 p-0">
+                <div class="col-4 pr-0">
                     <div class="dropdown">
                         <span id="language_menu_mob" class="d-flex align-items-center dropdown-btn" data-toggle="dropdown"
                               aria-haspopup="true" aria-expanded="false">
@@ -159,7 +166,7 @@
                                 <i class="flag-rus"></i>
                             {% endif %}
                         <span class="pl-3 pr-2 fs-14 pt-1">{{ settings.LANGUAGES_VIEWS.get(request.LANGUAGE_CODE, '') }}</span>
-                            <i class="arr-down mt-1"></i>
+                            <i class="arr-down-black mt-1"></i>
                         </span>
                         <div class="dropdown-menu p-0 position-relative" aria-labelledby="language_menu_mob">
                             {% for l in settings.LANGUAGES %}

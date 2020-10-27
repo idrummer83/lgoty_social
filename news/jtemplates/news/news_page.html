@@ -14,7 +14,7 @@
                 <a class="d-inline-block pr-4 mb-3  mb-md-0" href="#">Субсидии</a>
                 <a href="#">Изменения</a>
             </div>
-            <div class="col-12 col-md-6 d-flex justify-content-md-end align-items-center position-relative">
+            <div class="col-12 col-md-6 d-none d-md-flex justify-content-md-end align-items-center position-relative">
                 <div class="pr-3 mr-3" style="border-right: 1px solid #E2E5EC;">
 {#                    <i class="search_2"></i>#}
                     <form action="{{ url('news:index') }}" method="GET">
@@ -72,7 +72,9 @@
                 </div>
             </div>
 
-            <div class="col-12 mt-5 pagination d-flex justify-content-center align-items-center order-3">
+        </div>
+
+        <div class="mt-5 pagination d-flex justify-content-between justify-content-sm-center align-items-center order-3">
                 {% if news.has_other_pages() %}
                     {% if news.has_previous() %}
                         <a class=" pr-3" href="?page={{ news.previous_page_number() }}"> &lt;
@@ -81,7 +83,7 @@
                         {% else %}
                         <span class="">
                             <span> &lt; </span>
-                            <span class="pl-3">Предыдущая</span>
+                            <span class="pl-3 d-none d-sm-inline">Предыдущая</span>
                         </span>
                     {% endif %}
                     <span class="current pl-3 pr-3">
@@ -99,18 +101,17 @@
                         {% endif %}
                     </span>
                     {% if news.has_next() %}
-                        <a class="pl-3 pr-3" href="?page={{ news.next_page_number() }}">
+                        <a class="pl-3 pr-sm-3" href="?page={{ news.next_page_number() }}">
                             <span class="pr-3 d-none d-sm-inline-block">Следующая</span> &gt;
                         </a>
                         {% else %}
                         <span class="">
-                            <span class="pr-3">Следующая</span>
+                            <span class="pr-3 d-none d-sm-inline">Следующая</span>
                             <span> &gt; </span>
                         </span>
                     {% endif %}
                 {% endif %}
             </div>
-        </div>
 
     </div>
 

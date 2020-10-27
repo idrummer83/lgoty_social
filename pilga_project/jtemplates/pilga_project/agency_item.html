@@ -2,15 +2,15 @@
 
 {% block page %}
 
-    <div class="container margin-top-80">
+    <div class="container margin-top-40">
 
         <div>
-            <div class="d-flex mb-5">
+            <div class="d-flex flex-wrap mb-5">
                 <a href="{{ url('institutions') }}">Учреждения</a>
                 <span class="pl-3 pr-3">
                     <i class="thumbnail"></i>
                 </span>
-                <span>{{ agency.agency }}</span>
+                <span class="d-block d-sm-inline">{{ agency.agency }}</span>
             </div>
         </div>
 
@@ -24,8 +24,8 @@
                     </div>
                     <div class="col-12 col-md-9">
                         <div class="agency-wrap">
-                            <h3 class="mb-3 header-page">{{ agency.agency }}</h3>
-                            <div class="fs-16">{{ agency.activity|safe }}</div>
+                            <h3 class="mb-3 header-page fs-22">{{ agency.agency }}</h3>
+                            <div class="fs-14">{{ agency.activity|safe }}</div>
 
                             <div class="row">
                                 <div class="col-12 col-md-6 mb-3 mb-md-0">
