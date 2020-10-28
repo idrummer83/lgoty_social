@@ -563,6 +563,11 @@ ul.ui-autocomplete li.ui-menu-item {
     text-align:left;
 }
 
+@media all and (max-width: 575px) {
+    .search-by-title {
+        width: 100%;
+    }
+}
 
 /**/
 
